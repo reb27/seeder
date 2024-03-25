@@ -1,20 +1,8 @@
-FROM golang:1.21 AS builder
+FROM mysql
 
-WORKDIR /app
+COPY ./schema.sql /docker-entrypoint-initdb.d/
 
-COPY go.mod go.sum ./
-RUN go mod download
+ENV MYSQL_ROOT_PASSWORD livraria2024
+ENV MYSQL_DATABASE livraria
 
-COPY *.go ./
-
-RUN CGO_ENABLED=0 GOOS=linux go build -o /app/main .
-
-FROM alpine:latest
-
-COPY --from=builder /app/main /app/main
-
-WORKDIR /app
-
-EXPOSE 8080
-
-CMD ["./main"]
+EXPOSE 3306

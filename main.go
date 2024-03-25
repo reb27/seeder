@@ -144,7 +144,7 @@ func seedEdicaoLivro(db *sql.DB) {
 		edicaoIsbn := isbns[gofakeit.IntRange(0, len(isbns)-1)]
 		codigoLivro := codigosLivros[gofakeit.IntRange(0, len(codigosLivros)-1)]
 
-		_, err := db.Exec("INSERT INTO EdicaoLivro (codigo, codigoLivro, edicaoIsbn) VALUES (?, ?, ?)", gofakeit.UUID(), codigoLivro, edicaoIsbn)
+		_, err := db.Exec("INSERT INTO EdicaoLivro (codigoLivro, edicaoIsbn) VALUES (?, ?)", codigoLivro, edicaoIsbn)
 		if err != nil {
 			panic(err)
 		}

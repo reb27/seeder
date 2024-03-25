@@ -31,7 +31,6 @@ CREATE TABLE Livro (
 );
 
 CREATE TABLE EdicaoLivro (
-    codigo VARCHAR(36) NOT NULL,
     codigoLivro VARCHAR(36) NOT NULL,
     edicaoIsbn VARCHAR(36) NOT NULL,
     CONSTRAINT EdicaoLivro_Edicao_isbn_fk FOREIGN KEY (edicaoIsbn) REFERENCES Edicao (isbn),
@@ -44,3 +43,19 @@ CREATE TABLE LivroAutor (
     CONSTRAINT LivroAutor_Autor_codigo_fk FOREIGN KEY (codigoAutor) REFERENCES Autor (codigo),
     CONSTRAINT LivroAutor_Livro_codigo_fk FOREIGN KEY (livroCodigo) REFERENCES Livro (codigo)
 );
+-- Criação dos Index ##################################################################################################
+
+CREATE INDEX idx_autor_codigo ON Autor (codigo);
+
+CREATE INDEX idx_editora_codigo ON Editora (codigo);
+
+CREATE INDEX idx_edicao_isbn ON Edicao (isbn);
+
+CREATE INDEX idx_livro_codigo ON Livro (codigo);
+
+CREATE INDEX idx_edicaolivro_codigoLivro ON EdicaoLivro (codigoLivro);
+CREATE INDEX idx_edicaolivro_edicaoIsbn ON EdicaoLivro (edicaoIsbn);
+
+CREATE INDEX idx_livroautor_codigoAutor ON LivroAutor (codigoAutor);
+CREATE INDEX idx_livroautor_livroCodigo ON LivroAutor (livroCodigo);
+
